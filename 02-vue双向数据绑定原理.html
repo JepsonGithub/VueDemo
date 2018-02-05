@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  
+<input type="text" id="txt" value="鹏鹏">
+
+<script>
+  var obj = {
+    name: "鹏鹏"
+  }
+
+  // 1. 当元素放生变化的时候, 影响数据
+  var txt = document.getElementById("txt")
+
+  // 注册 input 事件
+  txt.addEventListener("input", function(){
+    // 改变input值时, 同步更新到对象中
+    obj.name = txt.value
+  })
+
+  // 2 当数据发生变化时, 页面上也要变化
+  Object.defineProperty(obj, "name", {
+    get() {
+
+    },
+    set( value ) {
+      // 只要这个函数被调用了, 就证明属性被修改了
+      // 就可以在这里给绑定的元素赋值了
+      this._name = value;
+      // 改变对象的值时, 同步更新到页面中
+      txt.value = value;
+    }
+  })
+
+
+
+</script>
+
+</body>
+
+</html>

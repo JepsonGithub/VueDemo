@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    
+
+
+    // Object.defineProperty
+    // 功能: 可以用来给对象添加新属性, 也可以修改对象已经存在的属性
+    // 特点: 这种方式添加的属性可以设置属性的特征
+    // 属性的特征:
+    // 1. 属性可不可写
+    // 2. 属性可不可遍历(枚举)
+    // 3. 属性可不可删除
+    // 4. 属性的默认值
+    // 5. 属性的设置和获取方法( 重点 )
+
+    // 语法: 
+    // Object.defineProperty(要添加属性的对象, 要添加的属性名, 属性的特征对象)
+
+    var obj = { 
+      name: "鹏鹏"
+    }  
+    Object.defineProperty( obj, "yanzhi", {
+      // writeable 属性: 可设置当前属性是否可以被赋值, 默认是 false
+      // writable: true,
+      // enumerable 属性: 可设置当前属性是否可以被遍历, 默认是 false, 不可枚举
+      enumerable: true,
+      // configurable 属性: 设置当前属性描述符是否可改, 当前属性是否可删除, 默认是false
+      configurable: true,
+      // value 属性: 配置属性的默认值
+      // value: 99999999,
+      get: function() {
+        // get 函数, 属性在被获取值时, 自动调用, 获取的值时 get 函数的返回值
+        // console.log( "get函数被调用了" );
+        // 死循环: return this.yanzhi;
+        return this._yanzhi;
+      },
+
+      set: function( value ) {
+        // 可以在set方法中监听属性的变化
+        // 也可以在set方法中, 为属性的赋值设置合法性校验
+        console.log( "属性改变了" )
+        if ( value < 99999999999 ) {
+          this._yanzhi = 99999999999
+          throw "总有刁明想害朕"
+        }
+        this._yanzhi = value;
+      }
+    })
+
+    obj.yanzhi = 999;
+    console.log(obj.yanzhi);
+
+    
+  </script>
+  
+</body>
+</html>

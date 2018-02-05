@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 指定内容由 app 进行管理, 注意: id=app 不能加给body -->
+  <div id="app">
+    <input type="text" v-model="msg">
+    <span>{{ msg }}</span>
+  </div>
+
+  <span>{{ msg }}</span>
+  
+
+
+
+</body>
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+
+
+  // vuejs 的强项就在于数据绑定
+  
+  /* 多行注释: option + shift + a */
+
+  /* 
+    1. 双向数据绑定  (一般用于表单元素)
+       当数据和元素进行双向数据绑定之后, 数据发生变化, 元素中的内容也会发生变化, 元素中的内容发生变化, 数据也会发生变化
+    
+    2. 单向数据绑定  (一般用于展示型元素)
+       当数据和元素进行单向数据绑定之后, 数据发生变化, 元素中的内容也会发生变化, 元素的内容发生变化, 不会影响到数据
+  */
+
+  // 创建 Vue 实例
+  var app = new Vue({
+    // el 是一个固定的属性, 用来指定 vm 对象管理的元素
+    el: "#app",
+    // data 固定属性, 用来给 vm 对象管理的元素提供数据
+    data: {
+      msg: "我是数据"
+    }
+  })
+
+</script>
+
+</html>
