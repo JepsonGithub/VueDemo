@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <button @click="btnClick">按钮</button>
+    <!-- 相当于手动调用函数, 这样没有event -->
+    <button @click="btnClick2()">按钮2</button>
+    <!-- 但是就是想获取事件对象怎么办呢? -->
+    <button @click="btnClick2( $event )">按钮2 $event</button>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        // 如果事件是通过, 函数名称来直接注册的
+        // 我们可以直接通过函数的 e 参数来作为事件对象来用
+        btnClick( e ) {
+          console.log( e )
+        },
+        btnClick2( e ) {
+          console.log( e )
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
