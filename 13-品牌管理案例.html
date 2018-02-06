@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .brandlist {
+      border: 1px solid #000;
+    }
+    .brandlist td,th {
+      border: 1px solid #000;
+      width: 200px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <table>
+    <tr>
+      <td>请输入品牌名称</td>
+      <td><input type="text"></td>
+      <td><button>添加</button></td>
+    </tr>
+    <tr>
+      <td>请输入搜索关键字</td>
+      <td><input type="text"></td>
+    </tr>
+  </table>
+
+  <table class="brandlist">
+    <tr>
+      <th>id</th>
+      <th>品牌名称</th>
+      <th>创建时间</th>
+      <th>操作</th>
+    </tr>
+    <tr v-for="item in brands" :key="index">
+      <td>{{ item.id }}</td>
+      <td>{{ item.brandName}}</td>
+      <td>{{ item.cTime }}</td>
+      <td><button>删除 </button></td>
+    </tr>
+  </table>
+
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      brands: [
+        { id: 1, brandName: "林肯", cTime: (new Date).toLocaleDateString() },
+        { id: 2, brandName: "法拉利", cTime: (new Date).toLocaleDateString() },
+        { id: 3, brandName: "野马", cTime: (new Date).toLocaleDateString() },
+        { id: 4, brandName: "劳斯莱斯", cTime: (new Date).toLocaleDateString() },
+      ]
+    }
+  })
+</script>
+
+</body>
+</html>
