@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!-- v-if 是用来做条件判断的, 如果值为false, 则元素会直接被从 html 中删除了 -->
+  <div v-if="flag">{{ msg }}</div>
+
+  <!-- v-show 也可以用来做条件判断, 如果值为false, 则元素隐藏 -->
+  <!-- flag 不是基本数据类型, 不认识, 然后就到数据模型中找 -->
+  <div v-show="flag"> {{ msg }} </div>
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+  
+  var app = new Vue({
+    el: "#app",
+    data: {
+      flag: false,
+      msg: "你看不见我看不见我"
+    }
+  })
+
+</script>
+</body>
+</html>

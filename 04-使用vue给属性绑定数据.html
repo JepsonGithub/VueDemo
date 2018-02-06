@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    {{ msg }}
+    <!-- 当需要给html标签中的属性绑定一个数据的时候, 不能使用插值表达式
+         需要使用 v-bind 指令
+         语法: v-bind:属性名="数据名称"
+         简写: :属性名="数据名称"
+
+         如果视图中用到的属性, 在数据模型中没有定义, 就会报错
+    -->
+    <img :title="msg">
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello vue"
+      }
+    })
+
+  </script>
+</body>
+</html>

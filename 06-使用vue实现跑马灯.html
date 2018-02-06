@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+<div id="app">
+  <input type="text" v-model="msg">
+  <button v-on:click="start">start</button>
+  <button v-on:click="stop">stop</button>
+  <p>{{ msg }}</p>
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+
+  var app = new Vue({
+    el: "#app",
+    // data 里面是放数据的
+    data: {
+      msg: "你好, 世界这么大, 你应该出去看看",
+      timer: null
+    },
+
+    methods: {
+      start() {
+        this.timer = setInterval(() => {
+          // slice(start, end)  从start截到end, 包含start 不包含end
+          // slice(start) 从start 截到尾
+          // slice() 不传值截取一整个字符串
+          this.msg = this.msg.slice(1) + this.msg.slice(0,1)
+        }, 200)
+      },
+      stop() {
+        this.timer && clearInterval( this.timer )
+      }
+    }
+  })
+
+</script>
+
+</body>
+</html>
