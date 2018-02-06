@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+
+    <span>我是{{ name }}</span>
+    <p> 遍历数组 </p>
+    <ul>
+      <li v-for="item in friends">{{ item }}</li>
+    </ul>
+    <ul>
+      <li v-for="(item, index) in friends">索引: {{ index }}, 值: {{ item }} </li>
+    </ul>
+
+    <br>
+    <p> 遍历对象 </p>
+    <!-- v-for 遍历可以用来遍历对象, 加上 key 就是键 -->
+    <ul>
+      <li v-for="(item, key) in ppDeDuiXiang">键: {{ key }}, 值: {{ item }}</li>
+    </ul>
+
+
+    <br>
+    <p> 遍历字符串 </p>
+    <ul>
+      <li v-for="(item, index) in msg">键: {{ index }}, 值: {{ item }}</li>
+    </ul>
+
+    <br>
+    <p> 遍历数字 </p>
+    <span> 可以快速生成结构 </span>
+    <div v-for="item in 10">{{ item }}</div>
+
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        name: "鹏鹏",
+        msg: "我是一个很长的字符串",
+        friends: [ "张三", "李四", "王五", "赵六", "田七" ],
+        ppDeDuiXiang: {
+          name: "小美",
+          age: 18
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

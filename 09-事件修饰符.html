@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: hotpink;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+<!-- 元素id -->
+<div id="app">
+  <p> 默认是会冒泡, a有默认跳转行为, 可以通过 e.preventDefault e.stopPropagation 阻止冒泡阻止默认行为 </p>
+  <div class="box" @click="divClick">
+    <button @click="btnClick">button</button>
+    <a href="http://www.baidu.com" @click="aClick">百度</a>
+  </div>
+
+
+  <p>通过事件修饰符阻止冒泡.stop, 阻止默认行为.prevent</p>
+  <div class="box" @click="divClick">
+    <!-- 通过事件修饰符阻止冒泡 @click.stop -->
+    <button @click.stop="btnClick">button</button>
+    <!-- 既要阻止冒泡, 又要阻止默认行为, 连续点 -->
+    <a href="http://www.baidu.com" @click.stop.prevent="aClick">百度</a>
+  </div>
+
+  <p>捕获阶段执行 @click.capture 注意: capture 要绑定给外层box</p>
+  <div class="box" @click.capture="divClick">
+      <button @click="btnClick">button</button>
+  </div>
+
+  <br>
+
+  <p>只有自己能够触发 @click.self 注意: 冒泡了也不触发</p>
+  <div class="box" @click.self="divClick">
+      <button @click="btnClick">button</button>
+  </div>
+
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+  /* 
+    事件修饰符: 
+    通过事件修饰符, 我们可以为事件处理函数指定一些特定的功能
+    1. 阻止冒泡 stop
+    2. 阻止默认行为 prevent
+    3. 捕获阶段触发 capture
+    4. 只有自己能够触发 self, (冒泡了也不触发)
+    5. 只触发一次 once
+  */
+  
+  var app = new Vue({
+    // 指定管理的元素
+    el: "#app",
+    // 数据模型
+    data: {
+      
+    },
+    methods: {
+      divClick() {
+        alert( "div被点击了" )
+      },
+      btnClick( e ) {
+        // 会事件冒泡
+        alert( "btn被点击了" )
+        
+        // 阻止事件冒泡
+        // e.stopPropagation()
+      },
+      aClick( e ) {
+        // 不仅会冒泡, 还会有默认跳转行为
+        alert( "a被点击了" )
+
+        // e.stopPropagation();
+        // e.preventDefault();
+
+        // dom 中 return false 是可以的
+        // 但是在 vue 中, return false 不能阻止冒泡, 阻止默认行为
+        // return false;
+      }
+    }
+  })
+</script>
+</body>
+</html>
