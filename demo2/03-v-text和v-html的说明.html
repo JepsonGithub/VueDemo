@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <div>你好, 我是{{ msg }}</div>
+    <div v-text="msg">我会被替换掉</div>
+    <div v-text="'你好, 我是' + msg">我会被替换掉</div>
+
+    <!-- html 会把标签解析出来 -->
+    <div v-html="'你好, 我是' + msg">我会被替换掉</div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        msg: "<h1>这是div的内容</h1>",
+      }
+    })
+
+  </script>
+</body>
+</html>

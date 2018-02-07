@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <!-- 解决闪烁问题, 可以使用v-cloak指令, 配置css样式来实现
+         v-cloak指令会在vue.js加载完毕之后, 从元素中移除, 移除之后样式失效,
+         刚好渲染完成, 就展示出来了
+    -->
+    <div v-cloak> {{ msg }}</div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        msg: "我是一个会闪烁的内容"
+      }
+    })
+
+  </script>
+</body>
+</html>
