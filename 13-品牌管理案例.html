@@ -22,12 +22,12 @@
   <table>
     <tr>
       <td>请输入品牌名称</td>
-      <td><input type="text"></td>
-      <td><button>添加</button></td>
+      <td><input v-model="brandName" type="text"></td>
+      <td><button @click="addBrand">添加</button></td>
     </tr>
     <tr>
       <td>请输入搜索关键字</td>
-      <td><input type="text"></td>
+      <td><input v-model="keyWords" type="text"></td>
     </tr>
   </table>
 
@@ -38,11 +38,11 @@
       <th>创建时间</th>
       <th>操作</th>
     </tr>
-    <tr v-for="item in brands" :key="index">
+    <tr v-for="(item,index) in search()" :key="item.id">
       <td>{{ item.id }}</td>
       <td>{{ item.brandName}}</td>
       <td>{{ item.cTime }}</td>
-      <td><button>删除 </button></td>
+      <td><button @click="deleteBrand( item.id )">删除 </button></td>
     </tr>
   </table>
 
@@ -54,12 +54,36 @@
   var app = new Vue({
     el: "#app",
     data: {
+      brandName: "",
+      keyWords: "",
       brands: [
         { id: 1, brandName: "林肯", cTime: (new Date).toLocaleDateString() },
         { id: 2, brandName: "法拉利", cTime: (new Date).toLocaleDateString() },
         { id: 3, brandName: "野马", cTime: (new Date).toLocaleDateString() },
         { id: 4, brandName: "劳斯莱斯", cTime: (new Date).toLocaleDateString() },
       ]
+    },
+    methods: {
+      // 添加品牌
+      addBrand() {
+        if ( !this.brandName ) return
+        // 动态创建新对象, 并添加到 brands 中
+        let nextId = Math.max( ...this.brands.map( v=>v.id ) ) + 1
+        this.brands.push( { id: nextId, brandName: this.brandName, cTime: (new Date).toLocaleDateString() } )
+        this.brandName = ""
+      },
+      // 根据 id 删除品牌
+      deleteBrand( id ) {
+        if ( !id ) return
+        // findIndex找到 数组中 id 的对象的索引, 将其从数组中删除
+        let delIndex = this.brands.findIndex( v=>v.id === id )
+        this.brands.splice( delIndex, 1 )
+      },
+      // 搜索功能
+      search() {
+        // 过滤出符合条件的结果
+        return this.brands.filter( v=> (v.brandName.indexOf(this.keyWords) > -1) )
+      }
     }
   })
 </script>

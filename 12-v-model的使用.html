@@ -6,41 +6,41 @@
 </head>
 <body>
 
-  <div id="app">
-    <input type="text" v-model="msg">
-    <textarea  v-model="msg" name="" id="" cols="30" rows="10"></textarea>
+<div id="app">
+  <input type="text" v-model="msg">
+  <textarea  v-model="msg" name="" id="" cols="30" rows="10"></textarea>
 
-    <input v-model="isChecked" type="checkbox" name="" id="">
+  <input v-model="isChecked" type="checkbox" name="" id="">
 
-    <!-- 单选框不能简单的通过true, false 来控制, 因为有很多, 需要通过 value 值来控制 -->
-    <input v-model="selValue" value="1" type="radio" name="abc" id="">
-    <input v-model="selValue" value="2" type="radio" name="abc" id="">
+  <!-- 单选框不能简单的通过true, false 来控制, 因为有很多, 需要通过 value 值来控制 -->
+  <input v-model="selValue" value="1" type="radio" name="abc" id="">
+  <input v-model="selValue" value="2" type="radio" name="abc" id="">
 
 
-    <!-- 将选中的 value 值双向数据绑定了 -->
-    <select v-model="selected" name="" id="">
-      <option value="1">帅哥</option>
-      <option value="2">美女</option>
-      <option value="3">野兽</option>
-      <option value="4">大妈</option>
-    </select>
+  <!-- 将选中的 value 值双向数据绑定了 -->
+  <select v-model="selected" name="" id="">
+    <option value="1">帅哥</option>
+    <option value="2">美女</option>
+    <option value="3">野兽</option>
+    <option value="4">大妈</option>
+  </select>
 
-  </div>
+</div>
 
-  <script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/vue/dist/vue.js"></script>
 
-  <script>
-    
-    var app = new Vue({
-      el: "#app",
-      data: {
-        msg: "这是文本内容",
-        isChecked: true,
-        selValue: 2,
-        selected: 3
-      }
-    })
+<script>
+  
+  var app = new Vue({
+    el: "#app",
+    data: {
+      msg: "这是文本内容",
+      isChecked: true,
+      selValue: 2,
+      selected: 3
+    }
+  })
 
-  </script>
+</script>
 </body>
 </html>
