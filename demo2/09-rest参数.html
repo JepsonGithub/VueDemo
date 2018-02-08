@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+<script>
+  
+  // 箭头函数中, 当参数格式不定的情况下, 
+  // 不能通过 arguments 来获取实参列表
+  // 需要通过 rest 参数来实现
+
+  // 解构赋值
+  // var arr = [1,2,3,4,5]
+  // var [a, ...b] = arr;
+
+  // rest 参数, 会将剩余的所有参数存入到一个真数组中
+  var test = (a, ...res) => {
+    console.log( res )
+  }
+
+  test( 1, 2, 3, 4 )
+  test( 1, 2, 3, 4, 5 )
+  test( 1, 2, 3, 4, 5, 6 )
+
+</script>
+</body>
+</html>

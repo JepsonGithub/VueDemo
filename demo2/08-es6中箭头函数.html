@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  // 如果箭头函数的参数只有一个的时候, 参数的小括号可以省略掉
+  var test = a => {
+    console.log( a++ )
+  }
+
+  // 如果箭头函数的函数体中, 只有一句话, 那么大括号可以省略
+  var test = a => console.log( a++ )
+
+  // 如果箭头函数的函数体, 只有一句话, 而且是return, 那么 return 和 大括号都可以省略
+  var square = a => {
+    return a * a
+  }
+  // 简写
+  var square = a => a * a
+
+  console.log( square(2) )
+
+</script>
+</body>
+</html>
