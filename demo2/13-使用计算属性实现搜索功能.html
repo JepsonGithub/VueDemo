@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .brandlist {
+      border: 1px solid #000;
+    }
+
+    .brandlist td,
+    th {
+      border: 1px solid #000;
+      width: 200px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <table>
+      <tr>
+        <td>请输入品牌名称</td>
+        <td>
+          <input @keyup.enter="enterToAdd" v-model="brandName" type="text">
+        </td>
+        <td>
+          <button @click="addBrand">添加</button>
+        </td>
+      </tr>
+      <tr>
+        <td>请输入搜索关键字</td>
+        <td>
+          <input v-model="keyWords" type="text">
+        </td>
+      </tr>
+    </table>
+
+    <table class="brandlist">
+      <tr>
+        <th>id</th>
+        <th>品牌名称</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+      <tr v-for="(item,index) in search" :key="item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name}}</td>
+        <td>{{ item.ctime }}</td>
+        <td>
+          <button @click="deleteBrand( item.id )">删除 </button>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/axios/dist/axios.js"></script>
+
+  <script>
+
+    // 注册请求拦截器
+    axios.interceptors.request.use(config => {
+      let str = ""
+      for (var k in config.data) {
+        str += k + "=" + config.data[k] + "&"
+      }
+      config.data = str.slice(0, -1);
+      return config
+    })
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        brandName: "",
+        keyWords: "",
+        brands: []
+      },
+      created() {
+        this.render();
+      },
+      methods: {
+        enterToAdd() {
+          this.addBrand()
+        },
+        render() {
+          axios({
+            url: "http://vue.studyit.io/api/getprodlist",
+            method: "get"
+          }).then(info => {
+            console.log(info)
+            this.brands = info.data.message
+          })
+        },
+        // 添加功能
+        addBrand() {
+          axios({
+            url: "http://vue.studyit.io/api/addproduct",
+            method: "post",
+            data: {
+              name: this.brandName
+            }
+          }).then(info => {
+            console.log(info);
+            this.render()
+          })
+
+          this.brandName = ""
+        },
+        deleteBrand(id) {
+          axios({
+            url: `http://vue.studyit.io/api/delproduct/${id}`,
+            method: "get"
+          }).then(info => {
+            if (info.data.status == 0) {
+              this.render();
+            }
+          })
+        }
+      },
+
+      computed: {
+        search() {
+          return this.brands.filter(v => v.name.indexOf(this.keyWords) > -1)
+        }
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

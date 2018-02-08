@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    FirstName: <input type="text" v-model="firstName">
+    <br>
+    LastName: <input type="text" v-model="lastName">
+    <br>
+    FullName: <input type="text" v-model="fullName">
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        firstName: "",
+        lastName: ""
+      },
+      computed: {
+        // computed属性简写形式
+        // 相当于只给计算属性设置了一个getter
+        // fullName() {
+        //   return this.firstName + "." + this.lastName
+        // }
+
+        // computed属性的完成形式
+        fullName: {
+          get() {
+            return this.firstName + "." + this.lastName
+          },
+          set( value ) {
+            this.firstName = value.split(".")[0]
+            this.lastName = value.split(".")[1]
+          }
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
