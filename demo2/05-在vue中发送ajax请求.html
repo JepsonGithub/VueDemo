@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+
+  <script>
+
+    // vue 的核心功能中, 不包含 ajax 请求
+    // 所以要在 vue 中发送 ajax 请求, 需要使用第三方插件来实现
+
+    // 一般两种
+    // (1) vue-resource(插件): 官方提供的, 但是目前已经不再维护了
+    // (2) axios(不是vue插件): 第三方的发送ajax请求的包
+    
+    // vue-resource 
+    // cnpm install vue-resource -S
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+
+      created() {
+        console.log(1111);
+        this.$http
+          .post("http://vue.studyit.io/api/addproduct", {name: "奥迪"}, {emulateJSON: true})
+          .then( res=>{
+            console.log( res );
+          }, error => {
+            console.log( error );
+          })
+      }
+    })
+    
+    // Vue.http.get("./package.json").then(res=>{
+    //   console.log( res );
+    // }, ()=>{
+
+    // })
+
+
+  </script>
+</body>
+</html>

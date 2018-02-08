@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/axios/dist/axios.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      }
+    })
+
+/*     axios({
+      url: "http://vue.studyit.io/api/addproduct",
+      method: "post",
+      data: "name=bmw"
+    }).then(info=>{
+      console.log( info )
+    }) */
+
+
+    // 拦截器: 请求拦截器的作用, 就是将所有的请求, 全部拦截下来, 执行一段自己定义的代码, 再将加工过的结果进行提交请求
+
+    // 注册请求拦截器
+    axios.interceptors.request.use( config => {
+      // config 参数中包含的其实就是所有的请求相关的信息
+
+      // console.log( config.data )
+      // 请求的数据存放在 config.data 中
+      // 由于服务器端无法直接接收对象类型的数据
+      // 所以我们需要将其转成 key=value&key=value这样的字符串形式
+      let str = ""
+      for ( var k in config.data ) {
+        str += k + "=" + config.data[ k ] + "&"
+      }
+      config.data = str.slice(0,-1);
+
+      console.log( config.data )
+
+      // 由于拦截器的作用只是对请求的相关信息进行加工
+      // 最终还是要发送请求的, 所以最后还必须要返回 config
+      return config
+    })
+
+    // str.substr(start, length)
+    // str.substring(start, end)  包括start, 不包括 end
+    // str.slice(start, end) 可以写负值, 负值表示倒着数
+
+    axios({
+      url: "http://vue.studyit.io/api/addproduct",
+      method: "post",
+      data: {
+        name: "Jepson"
+      }
+    }).then(info=>{
+      console.log( info )
+    })
+
+ 
+
+  </script>
+</body>
+</html>

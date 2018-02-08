@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <div id="box">{{ msg }}</div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+
+
+    /**
+     * 重点: 钩子函数的执行时机
+     * 
+     * 因为我们可以在给钩子函数注册自己想要执行的操作,
+     * 想要在什么时候执行什么操作, 就必须要对每个钩子函数的执行时机非常清楚
+     * 
+     * 1. beforeCreate: 在所有的数据初始化之前
+     *    如果在beforeCreate 中访问 vue 实例中的数据, 是访问不到的
+     * 
+     * 2. created 在数据初始化完成之后
+     *    在这个钩子函数中, 是可以执行自己任何的对于数据的操作的, 因为可以拿到数据了
+     * 
+     * 3. beforeMount: 在模板创建之后, 模板进行渲染之前
+     *    在这个里面, 如果去访问页面中的元素, 会发现并没有渲染的效果
+     * 
+     * 4. mounted: 在模板渲染完成之后, 将渲染之后的结果挂载到页面上的时候
+     *    在这个里面, 是可以直接访问页面上已经渲染好的元素的
+     * 
+     * 5. beforeUpdate: 在vue监听到数据改变的时候, 在元素更新之前
+     *    如果这里访问页面中元素的内容, 那么访问到的还是旧的内容
+     * 
+     * 6. updated: 在vue监听到数据改变, 并且更新了页面元素之后
+     *    如果这里访问页面中元素内容, 那么访问到的就是新的内容
+     * 
+     * 7. beforeDestroy: 在 vue 实例销毁之前调用
+     *    这个时候访问, vue 对象还是正常可以访问的
+     * 
+     * 8. destroyed: 在 vue 实例销毁之后调用
+     *    这个时候, vue 对象已经被销毁了, 就不能访问了
+     * 
+     */
+    
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        msg: "太阳当空照, 花儿对我笑"
+      },
+      // 数据初始化之前, 这里没法访问实例
+      beforeCreate() {
+        console.log( "beforeCreate被执行了" )
+        console.log( this.msg )
+      },
+      // 数据初始化完毕
+      created() {
+        console.log( "created执行了" )
+        console.log( this.msg )
+      },
+      // 模板创建之后, 模板渲染之前
+      beforeMount() {
+        console.log( "beforeMount执行了" )
+        console.log(document.getElementById("box").innerHTML);
+      },
+      // 模板渲染完成, 页面中可以访问到元素
+      mounted() {
+        console.log( "mounted执行了" )
+        console.log(document.getElementById("box").innerHTML);
+      },
+      // 数据改变, 页面元素更新之前
+      beforeUpdate() {
+        console.log( "beforeUpdate执行了" )
+        console.log(document.getElementById("box").innerHTML);
+      },
+      // 更新同步之后
+      updated() {
+        console.log( "updated执行了" )
+        console.log(document.getElementById("box").innerHTML);
+      },
+      // 实例销毁之前
+      // app.$destroy() 可以销毁实例
+      beforeDestroy() {
+        console.log( "beforeDestroy执行了" )
+      },
+      // 实例销毁以后
+      destroyed() {
+        console.log( "destroyed执行了" )
+      }
+    })
+    
+
+  </script>
+</body>
+</html>
