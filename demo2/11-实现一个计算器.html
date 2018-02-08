@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <input type="text" v-model="num1">
+    +
+    <input type="text" v-model="num2">
+    <button>=</button>
+    <!-- <span v-text="result()"></span> -->
+    <!-- <span v-text="result()"></span> -->
+    <span v-text="result"></span>
+    <span v-text="result"></span>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    // 计算属性: 计算属性的本质就是一个函数, 
+    // 这个函数会有一个返回值, 使用这个函数的时候, 可以直接像使用属性一样方式去使用它
+    // 展示出来的内容就是这个函数的返回值
+
+    // 计算属性有缓存, 如果计算过一次之后, 数据没有发生改变, 那么下次来使用这个计算属性, 
+    // 将直接从缓存中获取, 而不是重新计算, 这样可以提高程序运行的效率!
+
+    // methods 中声明函数, 虽然也能实现计算属性类型的功能, 但是他没有缓存,
+    // 每次调用都会重新将函数的代码执行一遍, 效率会比较差
+
+    // 什么时候用计算属性? 什么时候用methods呢?
+    // 1. 当需要使用一个数据, 而这个数据是根据其他数据出来的,
+    //    那么这个数据就要使用计算属性来做
+
+    // 2. methods是将一些功能代码进行封装! 事件处理函数, 可以复用的一些请求函数...
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        num1: 0,
+        num2: 0
+      },
+      methods: {
+        // result() {
+        //   console.log( "result函数被执行了" )
+        //   return +this.num1 + +this.num2
+        // }
+      },
+      // 计算属性
+      computed: {
+        result() {
+          console.log( "result函数被执行了" )
+          return +this.num1 + +this.num2
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
