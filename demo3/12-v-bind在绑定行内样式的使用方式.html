@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <div :style="'width:100px; height: 100px; background-color: red;'"></div>
+    <div :style="style"></div>
+    <div :style="styleObj"></div>
+    <div :style="styleArr"></div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    // 1. 直接传字符串 width:100px; height: 100px; background-color: red;
+    // 2. 传对象 { width: "100px", height: "100px" }
+    // 3. 数组, 里面是样式对象
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        style: "width:100px; height: 100px; background-color: pink;",
+        styleObj: {
+          width: "100px",
+          height: "100px",
+          backgroundColor: "green"
+        },
+        styleArr: [
+          {
+            width: "100px",
+            backgroundColor: "yellowgreen"
+          },
+          {
+            height: "100px"
+          }
+        ]
+      }
+    })
+
+  </script>
+</body>
+</html>

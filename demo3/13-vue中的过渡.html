@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: hotpink;
+      transform: translateX(800px);
+    }
+
+    /* 过渡的几个状态节点, 
+       1. v-enter 进入前     opacity: 0
+       2. v-enter-active   
+       3. v-enter-to 进入后  opacity: 1
+
+       1. v-leave 离开前     opacity: 1
+       2. v-leave-acitve
+       3. v-leave-to 离开后  opacity: 0
+    */
+    .v-enter, .v-leave-to {
+      opacity: 0;
+    }
+    .v-enter-to, .v-leave {
+      opacity: 1;
+    }
+    .v-enter-active, .v-leave-active {
+      transition: all 1s linear;
+    }
+
+
+    /* 从哪enter出来 */
+    .slide-enter, .slide-leave-to {
+      transform: translateX(0px);
+    }
+    /* 最终enter-to默认状态 */
+    .slide-enter-to, .slide-leave {
+      transform: translateX(800px);
+    }
+    /* 中间状态有过渡 */
+    .slide-enter-active, .slide-leave-active {
+      transition: all 1s linear;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <button @click="toggleDiv">切换显示 div </button>
+    <!-- transition 的 name 属性是用来对应类样式的
+         如果不写name属性, name默认会去找 v-enter 这样的一组样式
+         如果写了name属性, 比如写了name="slide", 那么就会找 slide-enter 这样一组类样式
+    -->
+    <transition name="slide">
+      <div class="box" v-if="isShow"></div>
+    </transition>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        isShow: true
+      },
+      methods: {
+        toggleDiv() {
+          this.isShow = !this.isShow
+        }
+      }
+    })
+  </script>
+</body>
+</html>
