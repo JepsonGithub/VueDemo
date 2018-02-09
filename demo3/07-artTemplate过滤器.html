@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="box"></div>
+
+  <script type="text/html" id="tpl">
+    <div>
+      <p>{{ name }}</p>
+      <p>{{ age }}</p>
+      <p>{{ birthday | dateFormatter 'YYYY年MM月DD日, HH:mm:SS' "我是第3个参数" }}</p>
+    </div>
+  </script>
+
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+  <script src="./node_modules/art-template/lib/template-web.js"></script>
+  <script src="./node_modules/moment/min/moment.min.js"></script>
+  <script>
+
+    var obj = {
+      name: "鹏鹏",
+      age: 18,
+      birthday: new Date()
+    }
+
+    template.defaults.imports.dateFormatter = ( date, formate, arg3 ) => {
+      console.log( date );
+      console.log( arg3 );
+      // 将时间对象, 进行格式化后, 进行返回
+      return moment( date ).format( formate || "MMMM Do YYYY");
+    }
+
+    var html = template("tpl", obj);
+
+    $('#box').html( html )
+
+    // 过滤器?? 是啥??
+    // 过滤器的本质, 其实就是一个函数
+    // 这个函数接收参数, 将参数加工之后, 获得一个返回值
+    // 用户看到的就是这个返回值
+    
+  </script>
+</body>
+</html>

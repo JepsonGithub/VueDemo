@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      margin: 15px;
+    }
+    .red {
+      background-color: red;
+    }
+    .font {
+      font-size: 30px;
+      color: white;
+    }
+    .size {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <div :class="'red font size'">这是div的内容</div>
+    <div :class="style">这是div的内容</div>
+    <div :class="style2">这是div的内容</div>
+    <div :class="styleObj">这是div的内容</div>
+    <div :class="styleArr">这是div的内容</div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        style: "font red",
+        style2: [ "font", "red" ],
+        styleObj: {
+          red: true,
+          size: true,
+          font: false
+        },
+        // 这种用的比较少
+        styleArr: [ { red: true }, "font", { size: true } ]
+      }
+    })
+
+    // 为元素绑定类样式, 可以使用 v-bind:class=...
+    // 在绑定的时候, 可以绑定三种内容
+
+    // 1. 字符串  空格隔开的类样式 "red font size"
+    // 2. 数组   [ "red", "size", "font" ]
+    // 3. 对象   { red: true, size: true, font: false }
+    // 4. 数组里面放对象和字符串 [ { red: true }, "font", { size: true } ]
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <div>{{ money | moneyFormat }}</div>
+  <div v-pp="msg"></div>
+</div>
+
+<div id="app2">
+  <div>{{ money | moneyFormat() }}</div>
+  <div v-pp="msg"></div>
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+  // 1. 注册全局自定义指令: Vue.directive
+  // 2. 注册全局过滤器: Vue.filter
+  Vue.directive( "pp", (el, binding) => {
+    console.log( "Hello pp, 全局的自定义指令" )
+    el.innerText = binding.value
+  })
+  Vue.filter( "moneyFormat", val => {
+    return "$" + val
+  })
+
+  var app = new Vue({
+    el: "#app",
+    data: {
+      money: 999,
+      msg: "鹏鹏1"
+    },
+    directives: {
+      // "指令名" : 钩子函数
+      // "指令名" : 函数
+      pp: (el, binding) => {
+        // 局部优先级更高, 自己有就用自己的
+        console.log( "自己的局部自定义指令" );
+        el.innerText = binding.value
+      }
+    },
+    filters: {
+      "moneyFormat": val => {
+        return "局部$" + val
+      }
+    }
+  })
+  var app2 = new Vue({
+    el: "#app2",
+    data: {
+      money: 118,
+      msg: "鹏鹏2"
+    }
+  })
+</script>
+</body>
+</html>

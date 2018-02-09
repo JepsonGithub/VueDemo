@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  {{ birthday | dateFormatter("YYYY-MM-DD HH:mm:SS") }}
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script src="./node_modules/moment/moment.js"></script>
+
+<script>
+
+  // 注册过滤器
+  // Vue.filter("过滤器名称", value => {
+  //   // value 就是管道符前面的内容
+  // })
+  
+  Vue.filter("dateFormatter", (value, str) => {
+    console.log( str );
+    return moment( value ).format( str || "YY-MM-DD");
+  })
+
+  var app = new Vue({
+    el: "#app",
+    data: {
+      birthday: new Date()
+    }
+  })
+</script>
+</body>
+</html>
