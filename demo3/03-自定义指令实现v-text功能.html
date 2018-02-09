@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <div v-mytext="msg"></div>
+    <div v-text="msg"></div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    // 需求: 通过自定义 v-mytext 实现 v-text 功能
+    Vue.directive("mytext",{
+      bind(el, binding) {
+        // el: 拿到元素
+        // 内容: binding.value
+        el.innerText = binding.value;
+      },
+      update(el, binding) {
+        el.innerText = binding.value;
+      }
+    })
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        msg: "这是一个字符串"
+      }
+    })
+
+  </script>
+</body>
+</html>

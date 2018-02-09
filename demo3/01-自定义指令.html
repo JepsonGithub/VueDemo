@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <input type="text" v-model="msg" v-focus>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+
+    /* 
+      指令: 
+      vue中的指令, 其实就是html标签中, 添加一些vue中特定的自定义的属性
+      vue中通过解析这些指令, 就可以实现相应的一些功能
+
+      自定义指令:
+      vue中自带有很多的指令, 这些指令会提供非常强大且常见的功能
+      这些指令没法完成 100% 的需求, 所以需要我们自己进行自定义指令, 来实现一些我们自己想要的功能
+    */
+
+    // 需求: 实现自定义指令 v-focus, 功能让页面中的 input 框, 自动获取焦点
+
+    // 1. 注册一个全局的自定义指令
+    // 通过 Vue.directive 方法, 可以注册全局的自定义指令
+    // 语法: Vue.directive("指令名称(不加v-)", 钩子函数)
+    // 一共有 5 个钩子函数(不是说都必须要添加)
+    // (1) bind, 指令绑定到元素调用, 只调用一次
+    // (2) inserted: 当元素被插入到父节点的时候调用, 只调用一次
+    // (3) update: 当数据发生变化的时候, 会调用
+    // (4) componentUpdated: 当数据发生变化, dom元素更新完成调用
+    // (5) unbind: 当指令解绑, 调用
+
+    Vue.directive("focus", {
+      inserted(el) {
+        // el参数, 指定当前指令所在的元素
+        el.focus();
+      }
+    })
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        msg: "你好"
+      }
+    })
+
+  </script>
+</body>
+
+</html>

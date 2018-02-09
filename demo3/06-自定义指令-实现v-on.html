@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <button v-on:click.stop="btnClick">我是v-on按钮</button>
+    <button v-myon:click.stop="btnClick">我是v-myon按钮</button>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    Vue.directive("myon", {
+      bind(el, binding) {
+        // 1. 用户要注册什么事件  参数  binding.arg
+        // 2. 用户要实现什么特殊的功能(阻止事件冒泡)
+        // 3. 用户要注册事件的处理函数是谁
+        console.log( binding )
+        el.addEventListener( binding.arg, e => {
+          binding.value( e )
+          binding.modifiers.stop && e.stopPropagation();
+          binding.modifiers.prevent && e.preventDefault();
+        })
+      }
+    })
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+      methods: {
+        btnClick( e ) {
+          console.log( e );
+          alert(123)
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

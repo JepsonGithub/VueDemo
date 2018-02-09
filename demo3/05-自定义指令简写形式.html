@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <img v-bind:src="url" v-bind:tit="titid">
+    <img v-mybind:src="url" v-mybind:tit="titid">
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    // v-bind:src="url"
+    // Vue.directive("mybind", {
+    //   bind(el, binding) {
+    //     el.setAttribute(binding.arg, binding.value)
+    //   },
+    //   update(el, binding) {
+    //     el.setAttribute(binding.arg, binding.value)
+    //   }
+    // })
+
+    // 简写形式:
+    Vue.directive("mybind",( el, binding ) => {
+      el.setAttribute(binding.arg, binding.value)
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+        titid: 123,
+        url: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1518165552984&di=c4040aacb91792a372cd4afd5e49230e&imgtype=0&src=http%3A%2F%2Fp0.ifengimg.com%2Fa%2F2017_51%2Fd5ff73f9eb00011_size246_w600_h517.jpg"
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <div v-pp:jepson.shuai.gao.fu="obj.name"></div>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+
+    // 指令使用的基本格式:
+    // v-指令名称: 参数.修饰符 = "表达式"
+    // v-指令名称="表达式"  v-if=".."
+    // v-指令名称  v-cloak
+
+    Vue.directive("pp", {
+      bind( el, binding ) {
+        // el: 指定所在元素的 dom 对象
+        // binding: 指令基本信息
+        // binding是一个对象, 对象中包含
+        // 1. 指令名称
+        // 2. 指令使用的时候参数
+        // 3. 指令使用的时候的修饰符
+        // 4. 为指令赋值的表达式
+
+        // binding 的属性
+        // v-pp:jepson.shuai.gao.fu="obj.name"
+        
+        // 1. name: 就是我们注册指令的时候, 使用的名字 "pp"
+        // 2. rawName: 等号左边的全部内容  
+        // 3. arg: 参数部分的内容   jepson
+        // 4. modifiers: 是修饰符部分的内容, 是一个对象, 只要是修饰符中有的内容,
+        //    都会作为属性添加到这个对象中去, 值为 true
+        // 5. expression 就是为指令赋值的表达式字符串  obj.name
+        // 6. value 就是指令赋值表达式所代表的数据的值  鹏鹏
+
+        console.log( binding )
+      }
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+        obj: {
+          name: "鹏鹏"
+        }
+      }
+    })
+  </script>
+</body>
+</html>
