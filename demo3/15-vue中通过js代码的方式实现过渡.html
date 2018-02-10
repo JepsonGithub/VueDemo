@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <button @click="isShow=!isShow">toggle</button>
+  <transition
+    @before-enter = "beforeEnter"
+    @enter = "enter"
+    @before-leave = "beforeLeave"
+    @leave = "leave"
+  >
+    <div class="box" v-if="isShow"></div>
+  </transition>
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+  
+  var app = new Vue({
+    el: "#app",
+    data: {
+      isShow: false
+    },
+    methods: {
+      beforeEnter( el ) {
+        el.style.marginLeft = "-200px";
+      },
+      enter( el ) {
+        // 使用 el.offsetWidth 触发一次重绘, 让上面的样式生效
+        el.offsetWidth
+        el.style.transition = "all 1s linear"
+        el.style.marginLeft = "0"
+      },
+      beforeLeave( el ) {
+
+      },
+      leave( el ) {
+        el.style.marginLeft = "200px"
+      }
+    }
+  })
+</script>
+</body>
+</html>
