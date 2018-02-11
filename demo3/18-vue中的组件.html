@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+      <mycomp></mycomp>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+    <script>
+      // 什么是组件化?
+      // 将页面拆分成一个个组件, 每个页面都看作是由很多组件构成
+      // 每个组件中包含独立的 html css js 代码 可以任意拿到各个页面进行复用
+
+      // 全局注册vue中的组件
+      // 语法: Vue.component( "组件名称", { 这个对象中包含组件的一些配置信息 } )
+
+
+      Vue.component("mycomp", {
+        template: "<h1 @click='clickHandle'>这是组件中的内容: {{ msg }}</h1>",
+        data() {
+          return {
+            msg: "你好"
+          }
+        },
+        methods: {
+          clickHandle() {
+            alert( 123 )
+          }
+        },
+        created() {
+          console.log("组件被创建粗来了");
+        }
+      })
+
+      // 组件中已经注册好了, 如何将组件使用到页面中
+      // 注册好的组件, 在html代码中可以直接通过以组件名作为标签名的形式
+      // 写一个标签出来, 组件就被创建出来了
+      
+      var app = new Vue({
+        el: "#app",
+        data: {
+          msg: "我是主msg"
+        }
+      })
+
+    </script>
+</body>
+</html>

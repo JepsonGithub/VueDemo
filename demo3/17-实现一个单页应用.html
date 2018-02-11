@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .page {
+      display: none;
+      width: 300px;
+      height: 300px;
+      background-color: pink;
+    }
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#index">首页</a>
+    <a href="#login">登录页</a>
+    <a href="#list">列表页</a>
+  </nav>
+  <div class="page index active">
+    这是首页
+  </div>
+  <div class="page login">
+    这是登录页
+  </div>
+  <div class="page list">
+    这是列表页
+  </div>
+
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+
+  <script>
+    // 一进入页面, 就根据对应的 hash值 跳转到对应页面
+    hashHandle()
+
+    // 监听 hash 值的改变
+    window.onhashchange = function() {
+      hashHandle()
+    }    
+
+    function hashHandle() {
+      // 根据 hash 值切换到对应页面
+      $('.page').removeClass("active")
+      $( "." + location.hash.slice(1) ).addClass("active")
+    }
+  </script>
+</body>
+</html>

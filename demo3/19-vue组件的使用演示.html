@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .top {
+
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <myhead></myhead>
+    <mymain></mymain>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+
+    Vue.component("myhead", {
+      template: "<header class='top'> 我是头部组件 </header>"
+    })
+
+    Vue.component("mymain", {
+      template: "<div class='main'> {{ msg }} <mylunbo></mylunbo></div>",
+      data() {
+        return {
+          msg: "我是内容"
+        }
+      }
+    })
+
+    Vue.component("mylunbo", {
+      template: '<div>我是轮播图</div>'
+    })
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      }
+    })
+
+  </script>
+</body>
+</html>
