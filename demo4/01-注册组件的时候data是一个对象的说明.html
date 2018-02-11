@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <mycomp></mycomp>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    // 注册组件
+    Vue.component("mycomp", {
+      template: "<h1>我是组件{{ msg }}</h1>",
+      // 如果组件在创建的时候, data是一个对象, 而对象是引用类型
+      // 多个组件会共用同一个 data 对象, 但是不同的组件明显 data 对象是独立的
+      // data: {
+      //     msg: "我是内容"
+      // }
+
+      // 所以 data 需要时一个方法, 每次调用实例化, 都能返回一个独立的对象
+      data() {
+        return {
+          msg: "我是内容"
+        }
+      }
+    })
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      }
+    })
+
+  </script>
+</body>
+</html>

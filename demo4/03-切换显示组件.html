@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div > div{
+      height: 500px;
+      width: 500px;
+      background-color:pink;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <a href="#index">index页面</a>
+    <a href="#home">home 页面</a>
+    <a href="#user">user 页面</a>
+
+    <!-- 这个 component 标签只是用来占位的, 我们指定要在这个位置显示哪个组件 -->
+    <!-- component 有个属性 is 我们可以通过 is 赋值指定的组件名称, 来决定哪个组件显示在这个位置 -->
+    <component :is="activeComp"></component>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    // 注册组件
+    Vue.component("index", {
+      template: "<div> {{ msg }} </div>",
+      data() {
+        return {
+          msg: "我是 index 页面"
+        }
+      }
+    })
+    Vue.component("home", {
+      template: "<div> 我是 home 页 </div>"
+    })
+    Vue.component("user", {
+      template: "<div> 我是 user 页 </div>"
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+        activeComp: "index"
+      }
+    })
+    window.onhashchange = function() {
+      app.activeComp = location.hash.slice(1)
+    }
+  </script>
+</body>
+</html>

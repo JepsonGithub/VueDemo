@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div > div{
+      height: 500px;
+      width: 500px;
+      background-color:pink;
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <a href="#index">index页面</a>
+    <a href="#home">home 页面</a>
+    <a href="#user">user 页面</a>
+
+    <my-index :class='{ active: activeComp === "index" }'></my-index>
+    <my-home :class='{ active: activeComp === "home" }'></my-home>
+    <my-user :class='{ active: activeComp === "user" }'></my-user>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    // 注册组件
+    Vue.component("my-index", {
+      template: "<div> {{ msg }} </div>",
+      data() {
+        return {
+          msg: "我是 index 页面"
+        }
+      }
+    })
+    Vue.component("my-home", {
+      template: "<div> 我是 home 页 </div>"
+    })
+    Vue.component("my-user", {
+      template: "<div> 我是 user 页 </div>"
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+        activeComp: "index"
+      }
+    })
+
+    window.onhashchange = function() {
+      app.activeCompa = location.hash.slice(1)
+    }
+  </script>
+</body>
+</html>
