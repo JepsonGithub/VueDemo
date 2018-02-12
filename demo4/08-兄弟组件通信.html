@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <gege></gege>
+  <didi></didi>
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+  // global event bus
+
+  let youchai = new Vue()
+  // youchai.$on
+  // youchai.$emit
+
+  // 1. 在哥哥组件内 声明1个函数
+  // 2. 邮差内注册事件, 绑定哥哥的函数
+  // 3. 弟弟组件内, 触发邮差的事件即可
+
+  // 兄弟组件之间也是相互独立的
+  Vue.component("gege", {
+    template: "<div> 我是哥哥组件, 信箱: {{ msg }}</div>",
+    data() {
+      return {
+        msg: ""
+      }
+    },
+    methods: {
+      getMsgFromDiDi( msg ) {
+        console.log( "我的弟弟来信了" )
+        console.log( msg )
+        this.msg = msg
+      }
+    },
+    created() {
+      youchai.$on("brothertalk", this.getMsgFromDiDi )
+    }
+  })
+
+  Vue.component("didi", {
+    template: "<div> 我是弟弟组件 <input v-model='msg'/> <button @click='btnClick'> 发消息给哥哥 </button> </div>",
+    data() {
+      return {
+        msg: "我是弟弟的msg"
+      }
+    },
+    methods: {
+      btnClick() {
+        youchai.$emit("brothertalk", this.msg)
+      }
+    }
+  })
+  
+  var app = new Vue({
+    el: "#app",
+    data: {}
+  })
+</script>
+</body>
+</html>

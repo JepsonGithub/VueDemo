@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {}
+    })
+
+app.$on("news", arg => {
+  console.log( "大新闻来了, " + arg )
+})
+
+app.$emit("news", "鹏鹏找到女票辣!!!")
+
+// $on 可以用来注册事件
+// vue实例.$on("事件名称", arg=>{ } )
+
+// $emit 可以用来触发事件
+// vue实例.$emit("事件名称", 参数)
+
+  </script>
+</body>
+</html>
