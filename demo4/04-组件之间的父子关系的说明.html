@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <account></account>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    // 注意: 组件之间的父子关系的形成, 
+    // 是在使用组件的时候才形成的, 跟组件在哪声明的没有半毛钱关系!!
+    Vue.component("comp", {
+      template: "<h3>我是 comp 组件</h3>"
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+      components: {
+        account: {
+          template: "<div> 我是 account <comp></comp></div>"
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

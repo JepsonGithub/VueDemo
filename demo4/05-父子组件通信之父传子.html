@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!-- 1. 父组件想要给子组件传参, 在子组件标签上写一个属性, 将父组件的数据赋值
+        给当前属性, 子组件就可以通过 props 来接收到传递的参数了
+  -->
+  <son :msgfromfather="msg"></son>
+</div>
+
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+  // 组件之间是完全独立的, 子组件无法访问到父组件的内容的
+  Vue.component("son", {
+    // 3. 在子组件中, 使用数据, 直接使用在 props 中声明的名字即可
+    //    就像是在用自己的数据一样
+
+    // 4. 父组件的数据变化, 子组件使用的接收过来的数据, 也会随之变化
+    template: "<div>{{ msgfromfather }}</div>",
+    data() {
+      return {
+        msg: "我是子组件的msg"
+      }
+    },
+    // 2. 由于父组件传递数据过来, 所以子组件需要手动的通过 props 进行接收
+    props: [ 'msgfromfather' ]
+  })
+  
+  var app = new Vue({
+    el: "#app",
+    data: {
+      msg: "我是父组件的message"
+    }
+  })
+</script>
+</body>
+</html>

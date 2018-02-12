@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <!-- 2. 使用son组件的时候, 将父组件的 getMsgFromSon函数作为事件绑定给son组件, 
+            事件名称自己定义 -->
+    <son @func="getMsgFromSon"></son>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    // 问题: 组件之间是完全独立的, 父组件无法直接访问子组件内的数据
+
+    // 原理: 其实就是在父组件中声明一个函数
+    // 在子组件中 间接的调用父组件中的函数, 
+    // 将子组件中的数据 作为函数的参数传递给父组件
+
+    // 全局注册组件
+    Vue.component("son", {
+      template: "<h3><button @click='btnClick'> 传递数据给父元素 </button></h3>",
+      data() {
+        return {
+          msg: "Dady, 我没有钱了, 给我来点钱吧"
+        }
+      },
+      methods: {
+        btnClick() {
+          // 发送数据给父组件, 需要触发父组件绑定的事件
+          // this.$emit("事件名称", 给事件传递的参数)
+          // 注意: this.$emit 传递参数只能传一个, 如果需要传多个数据
+          //      可以封装到一个对象中去
+          this.$emit("func", this.msg)
+        }
+      }
+    })
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        msg: "这是父组件中的数据"
+      },
+      // 1. 声明函数
+      methods: {
+        getMsgFromSon( msg ) {
+          console.log( "儿子来信了, 他说: " + msg )
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
