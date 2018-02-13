@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <router-link to="/pp?name=pp&age=18">跳转</router-link>
+
+    <!-- 挖个坑 router-view 用来渲染组件 -->
+    <router-view></router-view>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+
+  <script>
+    // 路由的创建步骤
+    // 1. 准备组件构造函数
+    // 2. 通过 VueRouter 创建路由
+    // 3. 配置路由参数routes, 指定 path 和 component
+    // 4. 页面中挖个坑 router-view, 用以渲染匹配的组件
+    // 5. 在 vue 中注册路由
+
+
+    // 创建组件构造函数
+let pp = {
+  template: "<div>{{ msg }}, 我是 {{ $route.query.name }}, 我今年 {{ $route.query.age }} 岁了</div>",
+  created() {
+    console.log( this.$route )
+    //获取参数
+    console.log( this.$route.query )
+  },
+  data() {
+    return {
+      msg: "组件中的msg参数"
+    }
+  }
+}
+
+    // 创建路由
+    let router = new VueRouter({
+      routes: [
+        // 指定path 和 对应的 component
+        {
+          path: "/pp",
+          component: pp
+        }
+      ]
+    });
+
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+      // 注册路由
+      router
+    })
+
+  </script>
+</body>
+</html>

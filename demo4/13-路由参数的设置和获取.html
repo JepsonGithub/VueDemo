@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <router-link :to="{ name: 'pp', params: { age: 18, name: 'pp'} }">link</router-link>
+    <router-view></router-view>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+
+  <script>
+    // 创建组件构造对象
+    let pp = {
+      template: "<div> 我是 pp 组件, 我今年 {{ $route.params.age }}岁 </div>",
+      created() {
+        console.log( this.$route.params )
+      },
+      data() {
+        return {
+          msg: "hello" 
+        }
+      }
+    }
+
+    // 创建路由对象
+    let router = new VueRouter({
+      routes: [
+        {
+          name: "pp",
+          // 加上 ? 可传可不传, 可以设置多个参数
+          path: "/pp/:age/:name?",
+          component: pp
+        }
+      ]
+    })
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+      router
+    })
+
+  </script>
+</body>
+</html>

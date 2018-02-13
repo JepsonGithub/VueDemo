@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    
+    <router-view></router-view>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+
+  <script>
+    let account = {
+      template: "<div><h1>这是account页面<router-view></router-view></h1></div>"
+    }
+    let login = {
+      template: "<div><h1>这是login页面</h1></div>"
+    }
+    let register = {
+      template: "<div><h1>这是register页面</h1></div>"
+    }
+
+    let router = new VueRouter({
+      routes: [
+        {
+          path: "/account",
+          component: account,
+          children: [
+            {
+              // 注意: 前面千万不能加 /
+              path: "login",
+              component: login
+            },
+            {
+              path: "register",
+              component: register
+            }
+          ]
+        }
+      ]
+    })
+
+
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+      router
+    })
+
+  </script>
+</body>
+</html>

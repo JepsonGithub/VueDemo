@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <a href="#/findmusic">发现音乐</a>
+    <a href="#/mymusic">我的音乐</a>
+    <a href="#/friend">朋友</a>
+
+    <br>
+    <!-- router-link 最终生成的也是 a 标签
+          但是和直接写 a 不一样的是, 
+          vue 会自动为当前 激活的 router-link 标签
+          添加 router-link-exact-active 
+          router-link-active 类样式
+          
+          可以利用这个特性, 方便的让当前页面的链接高亮
+    -->
+    <router-link tag="button" to="/findmusic">发现音乐</router-link>
+    <router-link :to="{path: '/mymusic'}">我的音乐</router-link>
+    <router-link :to="{name: 'friend'}">朋友</router-link>
+
+    <!-- 可以指定 query 参数 -->
+    <router-link :to="{name: 'friend', query: { titid: 123, age: 18 } }">朋友</router-link>
+    <router-link to="/friend?titid=123&age=18">朋友</router-link>
+
+    <!-- 3. vue-router 会自动将匹配到的组件显示在 router-view 中 -->
+    <router-view></router-view>
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+  <script>
+
+    // 使用路由的目的, 当用户访问到不同的 hash 值时让用户显示不同的内容
+
+    // 1. 创建组件的构造对象
+    let findMusic = {
+      template: "<div> 这是发现音乐页面 </div>"
+    }
+
+    let myMusic = {
+      template: "<div> 我的音乐 </div>"
+    }
+
+    let friend = {
+      template: "<div> 我的朋友 </div>"
+    }
+
+    // 2. 创建路由对象, 并且指定路由规则
+    let router = new VueRouter({
+      // routes 中的每一个元素都是一个对象, 表示hash值与组件的对应关系
+      routes: [
+        {
+          // 这个就是用户最终访问的 路由路径
+          path: "/findmusic",
+          // 访问这个路径的时候, 应该显示的组件
+          component: findMusic
+        },
+        {
+          path: "/mymusic",
+          component: myMusic
+        },
+        {
+          name: "friend",
+          path: "/friend",
+          component: friend
+        }
+      ]
+    })
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+      // 4. 将 router 和 vue 关联
+      router
+    })
+
+  </script>
+</body>
+</html>
