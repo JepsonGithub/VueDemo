@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <input type="text" v-model="name">
+    <input type="text" v-model="money">
+  </div>
+
+  <script src="./node_modules/vue/dist/vue.js"></script>
+
+  <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        name: "jepson",
+        money: 99,
+        girlfriend: {
+          name: "刘亦菲",
+          age: 18
+        }
+      },
+      updated() {
+        // update 是在任意数据发生变化的时候, 都会调用
+        // 所以我们无法得知哪个变化了
+        // console.log( "数据发生变化了" )
+      },
+      watch: {
+        money( newValue, oldValue ) {
+          console.log( "谁动了我的 money ")
+          console.log( "新的值:" + newValue )
+          console.log( "旧的值:" + oldValue )
+        },
+        // girlfriend( newValue, oldValue ) {
+        //   console.log( "新的值" + newValue );
+        //   console.log( "旧的值" + oldValue );
+        // },
+        // "girlfriend.name"(newValue, oldValue) {
+        //   console.log( "------" );
+        //   console.log( "新的值" + newValue );
+        //   console.log( "旧的值" + oldValue );
+        // }
+        girlfriend: {
+          handler( newValue, oldValue ) {
+            console.log( newValue, oldValue )
+          },
+          // 加上 deep true 表示深度监视
+          deep: true,
+          // 设置 immediate 为 true
+          // 可以在 监视器 生效的时候, 就执行一次这个 handler 函数, 不论是否变化
+          immediate: true
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>
