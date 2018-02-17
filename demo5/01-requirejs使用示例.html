@@ -28,10 +28,29 @@
     //         做的事情必须放在这个回调函数内 
     //      })
 
-    require(["./modules/a"], function() {
-      console.log( "a 模块加载完毕" )
-    })
-  
+    // require(["./modules/a"], function() {
+    //   console.log( "a 模块加载完毕" )
+    // })
+
+    // 3. 定义模块的时候, 有导出项的时候
+    //    如果有导出项, 只需要将导出项 return 即可
+
+    // 4. 引用模块的时候, 如果模块有导出项, 怎么使用导出项 ?
+
+      // require(["./modules/a", "./modules/b"], function( tool, b ) {
+      //   console.log( tool, b )
+      // })
+      // require(["./modules/c", "./modules/a", "./modules/b"], function(c, a, b) {
+      //   // 如果模块没有导出内容, 将会返回 undefined
+      //   console.log( arguments );
+      // })
+
+    /* 
+      5. 模块的依赖项
+         在定义一个模块的时候, 这个模块可能会使用到其他模块的内容
+         这些其他模块就可以称作是当前模块的依赖项
+    */
+   require(["./modules/need"])
   </script>
 </body>
 </html>
