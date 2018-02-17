@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script src="./require.js"></script>
+  <script>
+
+    // 1. 定义模块
+    // 在 require.js 中, 模块也是分成一个个文件保存的
+    // 而且, 每个模块中都有自己单独的作用域
+
+    // 定义模块的时候, 需要使用 requirejs 提供的方法
+    // define
+    // 语法: define(["模块名称"], ["模块依赖项"], function() {} )
+
+    // 2. 引用模块
+    // 在 requirejs 中引用一个模块, 使用 require.js 提供的函数
+    // require
+    // 语法: require(["模块文件的路径(不带.js后缀)"], function() {
+    //         模块加载成功之后的回调函数
+    //         模块的加载时异步的, 所以要在模块加载完成之后, 
+    //         做的事情必须放在这个回调函数内 
+    //      })
+
+    require(["./modules/a"], function() {
+      console.log( "a 模块加载完毕" )
+    })
+  
+  </script>
+</body>
+</html>

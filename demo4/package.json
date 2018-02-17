@@ -12,5 +12,9 @@
   "dependencies": {
     "vue": "^2.5.13",
     "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-env": "^1.6.1"
   }
 }
