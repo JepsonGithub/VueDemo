@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script src="./require.js"></script>
+
+  <script>
+    // config 方法是用来配置 require 的一些加载规则的
+    require.config({
+      // baseUrl 指的就是查找模块时的基础路径, 所有的模块的查找都会以这个为参照
+      // 一般都被设置成绝对路径
+      baseUrl: "/demo5/modules",
+      // 可以用这个 paths 给模块路径设置别名 (ID)
+      paths: {
+        jQ: "./jQuery/jq"
+      }
+    }) 
+
+    // 当引用模块的时候, 模块的路径 baseUrl + 引用模块的路径
+    require(["./a"]);
+
+    // 每次都写全路径很麻烦, 可以在 config 中配置路径别名
+    // require(["./jQuery/jq"])
+    // 这里路径计算规则 = baseUrl + paths 中配置的别名路径
+    require(["jQ"])
+  </script>
+
+</body>
+</html>

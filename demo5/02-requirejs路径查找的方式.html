@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script src="./require.js" data-main="./modules/main.js"></script>
+  
+  <script>
+    // 在 requirejs 中 模块路径的查找方式
+
+    // 1. 最简单的, 不做任何配置, 直接以当前文件的路径为参照
+    // require(['./modules/a'])
+
+    // 2. 如果设置了 data-main 属性, 那么模块的查找, 会以 data-main指定的文件(main.js)路径作为基础, 
+    //    而不是 html 页面为基础
+    //    data-main 是一个属性, 是引入 require.js 的script 标签的属性
+    //    这个属性可以用来指定一个文件, 指定的文件会在require.js 加载完毕之后, 通过异步的方式加载, 并且执行里面的代码
+    //    这个属性可以称为是入口文件, 刚一开始就要执行的代码都可以放到这个文件中
+
+    /* 
+      3. 如果通过 require.config 方法配置了基础路径, 那么所有的模块查找都会以这个基础路径作为参照了
+    */
+
+    // 注意: 第三种方式中,
+    // 找文件的规则是: baseUrl + 文件路径 或者 baseUrl + paths
+    // 如果引用模块的时候, 路径写法是如下 3 种形式之一, 就不遵守上面的规则了
+
+    // 1. 文件路径 加上了 .js 后缀
+    // 2. 文件路径 是以 / 开头的绝对路径
+    // 3. 文件路径 以 http:// 或者 https:// 开头的
+  </script>
+</body>
+</html>
