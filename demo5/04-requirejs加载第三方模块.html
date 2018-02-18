@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./require.js"></script>
+  <script>
+    // 第三方: jQuery.js bootstrap.js art-template.js ...
+    // 使用 require.js 加载第三方模块的时候, 遵循以下的思考步骤:
+    // 1. 考虑: 要加载的第三方模块支不支持 AMD 标准
+    //    参考依据: (1) 官网说明
+    //             (2) 查看源代码, 看里面有没有 AMD 相关的代码(define)
+    
+    // 结果: (1) 如果支持, 就能正常使用, require 直接引用
+    //       (2) 如果不支持, 继续下一步
+
+    // 2. 不支持 AMD 的时候, 考虑
+    // 2.1 这个第三方模块有没有依赖项
+    //     有: 在 require.config 中通过 shim 属性, 配置依赖项
+    //     没有: 直接 require
+
+    // 2.2 这个第三方模块有没有导出项
+    //     有: 在 require.config 中通过 shim 属性, 配置 exports
+    //     没有: 直接 require
+
+
+    // 2.3 如果上面两个都没有, 那么直接 require 就行了 
+    
+    
+  </script>
+</body>
+</html>

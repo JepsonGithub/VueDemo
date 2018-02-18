@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+
+<script src="./require.js"></script>
+<script>
+  // 引入 boostrap
+
+  // 配置一下 baseUrl 路径
+  require.config({
+    baseUrl: "/demo5",
+    paths: {
+      "bootstrap": "./node_modules/bootstrap/dist/js/bootstrap.bundle",
+      "jQuery": "./node_modules/jquery/dist/jquery"
+    },
+    // requirejs 中可以通过设置 shim, 解决有依赖项的第三方js的加载问题
+    shim: {
+      // 配置 bootstrap
+      "bootstrap": {
+        // 设置依赖项 jQuery
+        deps: ["jQuery"]
+      }
+    }
+  })
+
+  // 引入 bootstrap
+  require( ["bootstrap"] )
+
+
+</script>
+</body>
+</html>
