@@ -1,0 +1,12 @@
+{
+  "name": "mydemo",
+  "version": "1.0.1",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.9",
+    "style-loader": "^0.20.2",
+    "webpack": "^3.11.0"
+  }
+}
