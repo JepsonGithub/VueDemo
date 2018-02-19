@@ -20,6 +20,9 @@ import * as obj from "./a.js"
 // 导入 css 文件
 import "./index.css"
 
+// 导入 less 文件
+import "./index.less"
+
 console.log( obj.a );
 
 $("li:odd").css("background-color", "pink");
