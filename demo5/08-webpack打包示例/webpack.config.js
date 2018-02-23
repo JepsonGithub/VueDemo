@@ -23,6 +23,17 @@ module.exports = {
           { loader: 'css-loader' },
           { loader: 'less-loader' }   // 将 less 编译成 css     
         ]
+      },
+      {
+        test: /\.(jpg|gif|png|jpeg|bmp|svg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192
+            }
+          },
+        ]
       }
     ]
   }
