@@ -34,6 +34,20 @@ module.exports = {
             }
           },
         ]
+      },
+      {
+        test: /\.(ttf|woff2|woff|eot)$/,
+        use: [
+          {
+            loader: "url-loader"
+          },
+        ]
+      },
+      {
+        test: /\.js$/,
+        use: [
+          { loader: "babel-loader" }
+        ]
       }
     ]
   }
