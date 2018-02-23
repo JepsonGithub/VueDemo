@@ -1,4 +1,5 @@
 const path = require("path")
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, "./index.js"),
@@ -45,10 +46,22 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        // 添加排除项, 不对 node_modules 下的内容做处理
+        exclude: /(node_modules|bower_components)/,
         use: [
-          { loader: "babel-loader" }
+          { 
+            loader: "babel-loader",
+            options: {
+              presets: ['env']
+            }
+          }
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "index.html")
+    })
+  ]
 }
